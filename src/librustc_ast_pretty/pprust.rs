@@ -1780,15 +1780,15 @@ impl<'a> State<'a> {
             }
 
             (
-                &ast::ExprKind::Block( .. ) |
-                &ast::ExprKind::If( .. ) | 
-                &ast::ExprKind::While( .. ) | 
-                &ast::ExprKind::ForLoop( .. ) |
-                &ast::ExprKind::Loop( .. ) |
-                &ast::ExprKind::Async( .. ) |
-                &ast::ExprKind::Match( .. ), _)  => {
-                parser::PREC_FORCE_PAREN
-            }
+                &ast::ExprKind::Block(..)
+                | &ast::ExprKind::If(..)
+                | &ast::ExprKind::While(..)
+                | &ast::ExprKind::ForLoop(..)
+                | &ast::ExprKind::Loop(..)
+                | &ast::ExprKind::Async(..)
+                | &ast::ExprKind::Match(..),
+                _,
+            ) => parser::PREC_FORCE_PAREN,
             _ => left_prec,
         };
 
