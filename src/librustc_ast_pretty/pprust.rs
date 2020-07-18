@@ -1778,6 +1778,17 @@ impl<'a> State<'a> {
             (&ast::ExprKind::Let { .. }, _) if !parser::needs_par_as_let_scrutinee(prec) => {
                 parser::PREC_FORCE_PAREN
             }
+
+            (
+                &ast::ExprKind::Block( .. ) |
+                &ast::ExprKind::If( .. ) | 
+                &ast::ExprKind::While( .. ) | 
+                &ast::ExprKind::ForLoop( .. ) |
+                &ast::ExprKind::Loop( .. ) |
+                &ast::ExprKind::Async( .. ) |
+                &ast::ExprKind::Match( .. ), _)  => {
+                parser::PREC_FORCE_PAREN
+            }
             _ => left_prec,
         };
 
